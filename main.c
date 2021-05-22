@@ -3,6 +3,11 @@
 #include <stdint.h>
 #include <string.h>
 
+#define __DEBUG
+
+#define BMPINPUTFILE "test.bmp"
+#define MAXCHAR 1000
+
 //Simplified declaration of used types
 typedef uint32_t DWORD; 
 typedef int32_t  LONG; 
