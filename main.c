@@ -89,15 +89,16 @@ int main(int argc, char *argv[ ])
 			exit(EXIT_FAILURE);
 			return 0;
 	}
-	int eof = 0;
+	int eof = 1;
 	int fileReadToString = 0;
 	char secretMessage[2048] = "";
-	while(eof == 0)
+	while(eof == 1)
 	{
 		eof = fread(&secretMessage[fileReadToString], 1, 1, fileTextIn);
 		fileReadToString++;
 	}
 	printf("found in text file: %s\r\n", secretMessage);
+	fclose(fileTextIn);
 	
 	filePointerIn = fopen(argv[5], "rb"); //Open input file as read-only (binary)
 	if(filePointerIn == NULL)
@@ -109,7 +110,7 @@ int main(int argc, char *argv[ ])
 	
 	FILE *filePointerOut = NULL;
 	
-	filePointerOut = fopen(argv[7], "w"); //Open/create output file as writable (binary)
+	filePointerOut = fopen(argv[7], "wb"); //Open/create output file as writable (binary)
 	if(filePointerOut == NULL)
 	{
 		printf("Kan bestand niet aanmaken\n");
@@ -143,7 +144,7 @@ int main(int argc, char *argv[ ])
 		if(strlen(secretMessage) > counter)
 		{
 			
-			bitmask = 0x01 & (letter >> 1 - counterByte);
+			bitmask = 0x01 & (letter >> 7 - counterByte);
 			saveVariable.tempByte = saveVariable.tempByte | bitmask;
 			//printf("%x \r\n", saveVariable.tempByte);
 			bin(saveVariable.tempByte);
@@ -187,7 +188,7 @@ int main(int argc, char *argv[ ])
 	
 	FILE *filePointerOut = NULL;
 	
-	filePointerOut = fopen(argv[5], "w"); //Open/create output file as writable (binary)
+	filePointerOut = fopen(argv[5], "wb"); //Open/create output file as writable (binary)
 	if(filePointerOut == NULL)
 	{
 		printf("Kan bestand niet aanmaken\n");
@@ -239,6 +240,7 @@ int main(int argc, char *argv[ ])
 	}
 	
 	memset(filePointerOut, 0, 1024);//maakt de outfile leeg zodat er geen random char inzitten
+	fclose(filePointerOut);
 	filePointerOut = fopen(argv[5], "w");//outfile opnieuw opnenen 
 	printf("text: %s\r\n", decodedText);//printen van secret message in de console
 	int results = fputs(decodedText, filePointerOut);//output van secret message in txt file
