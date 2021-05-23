@@ -19,7 +19,7 @@ typedef int32_t  LONG;
 typedef uint16_t WORD;
 
 
-char secretMessage[] = "Secret message*";
+//char secretMessage[] = "Secret message*";
 
 #pragma pack(push, 1) //Disable padding
 	typedef struct teInverteren //Struct to temporarily save 1 byte value
@@ -80,6 +80,24 @@ int main(int argc, char *argv[ ])
 		if (argc == 8 && strncmp(argv[2], "-s", 2) == 0 && strncmp(argv[4], "-i", 2) == 0 && strncmp(argv[6], "-o", 2) == 0)
 		{
 				FILE *filePointerIn = NULL;
+				FILE *fileTextIn = NULL;
+	
+	fileTextIn = fopen(argv[3], "r"); //Open input file as read-only (binary)
+	if(fileTextIn == NULL)
+	{
+			printf("Kan bestand niet openen\n");
+			exit(EXIT_FAILURE);
+			return 0;
+	}
+	int eof = 0;
+	int fileReadToString = 0;
+	char secretMessage[2048] = "";
+	while(eof == 0)
+	{
+		eof = fread(&secretMessage[fileReadToString], 1, 1, fileTextIn);
+		fileReadToString++;
+	}
+	printf("found in text file: %s\r\n", secretMessage);
 	
 	filePointerIn = fopen(argv[5], "rb"); //Open input file as read-only (binary)
 	if(filePointerIn == NULL)
@@ -125,7 +143,7 @@ int main(int argc, char *argv[ ])
 		if(strlen(secretMessage) > counter)
 		{
 			
-			bitmask = 0x01 & (letter >> 7 - counterByte);
+			bitmask = 0x01 & (letter >> 1 - counterByte);
 			saveVariable.tempByte = saveVariable.tempByte | bitmask;
 			//printf("%x \r\n", saveVariable.tempByte);
 			bin(saveVariable.tempByte);
@@ -182,8 +200,7 @@ int main(int argc, char *argv[ ])
 	
 	//Next 4 lines copy header information
 	fread(&headFile, sizeof(headFile), 1, filePointerIn);
-	//fwrite(&headFile, sizeof(headFile), 1, filePointerOut);
-	//fread(&infoHead, sizeof(infoHead), 1, filePointerIn);
+
 	fwrite(&infoHead, sizeof(infoHead), 1, filePointerOut);
 	
 	RGBSAVE saveVariable;
