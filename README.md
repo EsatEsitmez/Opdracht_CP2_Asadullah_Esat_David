@@ -5,7 +5,7 @@ In deze opdracht moest er een bericht ge-encode en gedecode zijn in een afbeeldi
 
 ```
 Deze opdracht is gemaakt door 3 personen. 
-Het is een eindopdrachr voor het hogeschool PXL voor het eerste jaar Elektronica-ICT.
+Het is een eindopdracht voor het hogeschool PXL voor het eerste jaar Elektronica-ICT.
 
 ```
 ### Studenten die eraan hebben gewerkt:
