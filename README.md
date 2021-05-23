@@ -10,7 +10,9 @@ Het is een eindopdrachr voor het hogeschool PXL voor het eerste jaar Elektronica
 ```
 ### Studenten die eraan hebben gewerkt:
 Esat Esitmez 
+
 David Farma
+
 Asadullah Chaudhry
 
 
