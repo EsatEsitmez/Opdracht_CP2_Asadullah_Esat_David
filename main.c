@@ -1,3 +1,8 @@
+// Asadullah Chaudhry, East Esitmez, David Farma
+// CP2: Semester opdracht
+// Elektronica-ICT
+// PBEAI-A
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -68,7 +73,7 @@ int main(int argc, char *argv[ ])
 	
 	if (strncmp(argv[1], "--help", 6) == 0)
 	{
-		printf("USAGE: \r\n");
+		printf("USAGE: Je moet gcc main.c -o test\r\n");
 	}
 	else if (strncmp(argv[1], "-c", 2) == 0 )
 	{
@@ -86,7 +91,7 @@ int main(int argc, char *argv[ ])
 	
 	FILE *filePointerOut = NULL;
 	
-	filePointerOut = fopen(argv[7], "wb"); //Open/create output file as writable (binary)
+	filePointerOut = fopen(argv[7], "w"); //Open/create output file as writable (binary)
 	if(filePointerOut == NULL)
 	{
 		printf("Kan bestand niet aanmaken\n");
@@ -108,36 +113,12 @@ int main(int argc, char *argv[ ])
 	unsigned char testClause = 1; //Variable to check error at end of file to stop loop
 	long counter = 0;
 	char counterByte = 0;
-	
-	/*int imageSize = 3 * headFile.infoBreedte * headFile.infoHoogte; //every pixel has 3 byte data:  (RGB) red green blue
-    unsigned char* inputPixels = (unsigned char *) calloc(imageSize, sizeof(unsigned char)); // allocate an array of all pixels
-    fread(inputPixels, sizeof(unsigned char), imageSize, filePointerIn); // read all pixels 
-    fclose(filePointerIn);*/
-	
-	//input text file to variable  secretMessage[]
+
 	
 	char letter = secretMessage[counter];
 	while(testClause == 1)
 	{
-		
-		/*if(strlen(saveVariable.secretMessage) > counter)
-		{
-			char letter = saveVariable.secretMessage[counter];
-			char bitmask = 0;
-			for(int i = 0; i < 8; i++)
-			{
-				testClause = fread(&saveVariable.tempByte, 1, 1, filePointerIn); //Read value
-				bitmask = 0x01 & (letter >> 7 - i);
-				saveVariable.tempByte = saveVariable.tempByte | bitmask;
-				fwrite(&saveVariable.tempByte, 1, 1, filePointerOut); //Write value
-			}
-		}
-		else
-		{
-			testClause = fread(&saveVariable.tempByte, 1, 1, filePointerIn); //Read value
-			fwrite(&saveVariable.tempByte, 1, 1, filePointerOut); //Write value
-		}*/
-		
+
 		
 		char bitmask = 0;
 		testClause = fread(&saveVariable.tempByte, 1, 1, filePointerIn); //Read value
@@ -188,7 +169,7 @@ int main(int argc, char *argv[ ])
 	
 	FILE *filePointerOut = NULL;
 	
-	filePointerOut = fopen(argv[5], "wb"); //Open/create output file as writable (binary)
+	filePointerOut = fopen(argv[5], "w"); //Open/create output file as writable (binary)
 	if(filePointerOut == NULL)
 	{
 		printf("Kan bestand niet aanmaken\n");
@@ -240,9 +221,12 @@ int main(int argc, char *argv[ ])
 		}
 	}
 	
-	printf("text: %s\r\n", decodedText);
+	memset(filePointerOut, 0, 1024);//maakt de outfile leeg zodat er geen random char inzitten
+	filePointerOut = fopen(argv[5], "w");//outfile opnieuw opnenen 
+	printf("text: %s\r\n", decodedText);//printen van secret message in de console
+	int results = fputs(decodedText, filePointerOut);//output van secret message in txt file
 	//print to text file
-	fclose(filePointerIn);
+	fclose(filePointerIn);// open files terug sluiten
 	fclose(filePointerOut);
 		}
 		else { printf("Use --help argument for usage\r\n"); }
@@ -252,11 +236,4 @@ int main(int argc, char *argv[ ])
 	return 0;
 }
 
-//------------------------------------------------------------
-//
-//	Bronvermelding
-//	https://stackoverflow.com/questions/23725180/pixel-manipulation-on-bitmap-file-in-c
-//
-//
-//
-//
+//compile fast daddy
