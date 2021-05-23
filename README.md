@@ -7,5 +7,4 @@ https://stackoverflow.com/questions/23725180/pixel-manipulation-on-bitmap-file-i
 Studenten die eraan hebben gewerkt:
 Esat Esitmez 
 David Farma
-Esat Esitmez
-
+Asadullah Chaudhry
