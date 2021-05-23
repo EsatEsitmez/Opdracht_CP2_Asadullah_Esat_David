@@ -36,12 +36,12 @@ typedef struct INFOHeader
 	DWORD infoGrootte;		//Struct size (byte)
 	LONG infoBreedte;		//Bitmap width (pixel)
 	LONG infoHoogte;		//Bitmap height (pixel)
-	WORD kleurPlane;	//Amount of color planes (1)
-	WORD bitPerPixel;			//Amount of bits per pixel
+	WORD kleurPlane;		//Amount of color planes (1)
+	WORD bitPerPixel;		//Amount of bits per pixel
 	DWORD compressieType;	//Compression type
 	DWORD bestandGrootte;	//Image size (byte)
-	LONG xResolutie;			//X axis pixels per meter
-	LONG yResolutie;			//Y axis pixels per meter
+	LONG xResolutie;		//X axis pixels per meter
+	LONG yResolutie;		//Y axis pixels per meter
 	DWORD bmpKleuren;		//Amount colors used in bitmap
 	DWORD bmpKleurenImp;	//Amount important colors
 }INFOHEADER;
@@ -51,11 +51,11 @@ typedef struct INFOHeader
 #pragma pack(push, 1) //Disable padding
 typedef struct BMPHeader
 {
-	WORD bestandType; 	//File type
+	WORD bestandType; 		//File type
 	DWORD bestandGrootte; 	//File size (byte)
-	WORD reserved1; 	//Reserved (0)
-	WORD reserved2;	//Reserved (0)
-	DWORD headerOffset;	//Offset fileheader to actual bitmap (bit)
+	WORD reserved1; 		//Reserved (0)
+	WORD reserved2;			//Reserved (0)
+	DWORD headerOffset;		//Offset fileheader to actual bitmap (bit)
 }HEADER;
 #pragma pack(pop)
 
@@ -197,7 +197,7 @@ int main(int argc, char *argv[ ])
 	char tempChar = 0;
 	while(testClause == 1 && msgEnd == 0)
 	{
-		//printf("count: %i\r\n", counter);
+		//hier doet het letter per letter in temchar schrijven tot dat er ster komt dan eindingt het bericht
 		testClause = fread(&saveVariable.tempByte, 1, 1, filePointerIn); //Read value
 		tempChar = tempChar << 1;
 		tempChar = tempChar | (saveVariable.tempByte & bitmask);
